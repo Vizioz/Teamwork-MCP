@@ -1,0 +1,68 @@
+# Smithery configuration file: https://smithery.ai/docs/build/project-config
+
+startCommand:
+  type: stdio
+  configSchema:
+    # JSON Schema defining the configuration options for the MCP.
+    type: object
+    required:
+      - teamworkDomain
+      - teamworkUsername
+      - teamworkPassword
+    properties:
+      teamworkDomain:
+        type: string
+        default: ""
+        description: Your Teamwork domain
+      teamworkUsername:
+        type: string
+        default: ""
+        description: Your Teamwork username (email)
+      teamworkPassword:
+        type: string
+        default: ""
+        description: Your Teamwork password
+      port:
+        type: number
+        default: 3000
+        description: Port for the server to listen on
+      logLevel:
+        type: string
+        default: info
+        description: Logging level
+      allow:
+        type: string
+        default: ""
+        description: Comma-separated list of tools or groups to allow
+      deny:
+        type: string
+        default: ""
+        description: Comma-separated list of tools or groups to deny
+  commandFunction:
+    # A JS function that produces the CLI command based on the given config to start the MCP on stdio.
+    |-
+    (config) => {
+      const args = [
+        "build/index.js",
+        "--teamwork-domain", config.teamworkDomain,
+        "--teamwork-username", config.teamworkUsername,
+        "--teamwork-password", config.teamworkPassword,
+        "--port", String(config.port)
+      ];
+      if (config.logLevel) args.push("--log-level", config.logLevel);
+      if (config.allow) args.push("--allow", config.allow);
+      if (config.deny) args.push("--deny", config.deny);
+      return {
+        command: "node",
+        args,
+        env: {}
+      };
+    }
+  exampleConfig:
+    teamworkDomain: your-company
+    teamworkUsername: user@example.com
+    teamworkPassword: yourPassword
+    port: 3000
+    logLevel: info
+    allow: Tasks,Projects
+    deny: ""
