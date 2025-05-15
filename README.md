@@ -1,6 +1,7 @@
 # Teamwork MCP
 
 [![npm version](https://img.shields.io/npm/v/@vizioz/teamwork-mcp.svg)](https://www.npmjs.com/package/@vizioz/teamwork-mcp)
+[![smithery badge](https://smithery.ai/badge/@Vizioz/Teamwork-MCP)](https://smithery.ai/server/@Vizioz/Teamwork-MCP)
 
 An MCP server that connects to the Teamwork API, providing a simplified interface for interacting with Teamwork projects and tasks.
 
@@ -81,6 +82,14 @@ The following tools are available through the MCP server:
 - `getTimezones` - Get all available timezones in Teamwork (useful when updating user timezones)
 
 ## Installation
+
+### Installing via Smithery
+
+To install Teamwork API Integration Server for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@Vizioz/Teamwork-MCP):
+
+```bash
+npx -y @smithery/cli install @Vizioz/Teamwork-MCP --client claude
+```
 
 1. Clone the repository:
 
