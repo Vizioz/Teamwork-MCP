@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/vizioz-teamwork-mcp-badge.png)](https://mseep.ai/app/vizioz-teamwork-mcp)
+
 # Teamwork MCP
 
 [![npm version](https://img.shields.io/npm/v/@vizioz/teamwork-mcp.svg)](https://www.npmjs.com/package/@vizioz/teamwork-mcp)
