@@ -18,7 +18,8 @@
   },
   "files": [
     "build",
-    "README.md"
+    "README.md",
+    "test-connection.js"
   ],
   "repository": {
     "type": "git",

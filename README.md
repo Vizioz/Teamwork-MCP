@@ -429,6 +429,64 @@ To run the MCP inspector for debugging:
 npm run inspector
 ```
 
+## Container Usage (GHCR)
+
+The Teamwork MCP server is available as a Docker container from GitHub Container Registry. This provides an easy way to run the server in any containerized environment.
+
+### Pull and Run
+
+Pull the latest image from GHCR:
+
+```bash
+docker pull ghcr.io/activ8-ai/teamwork-mcp:latest
+```
+
+Run the container with your Teamwork credentials:
+
+```bash
+# Using API Token (recommended)
+docker run -it --rm \
+  -e TEAMWORK_DOMAIN=your-company \
+  -e TEAMWORK_API_TOKEN=your-api-token \
+  ghcr.io/activ8-ai/teamwork-mcp:latest
+
+# Using Username/Password
+docker run -it --rm \
+  -e TEAMWORK_DOMAIN=your-company \
+  -e TEAMWORK_USERNAME=your-email@example.com \
+  -e TEAMWORK_PASSWORD=your-password \
+  ghcr.io/activ8-ai/teamwork-mcp:latest
+```
+
+### Optional Environment Variables
+
+You can also set additional configuration:
+
+```bash
+docker run -it --rm \
+  -e TEAMWORK_DOMAIN=your-company \
+  -e TEAMWORK_API_TOKEN=your-api-token \
+  -e TEAMWORK_PROJECT_ID=123456 \
+  -e ALLOW_TOOLS=getProjects,getTasks,createTask \
+  -e DENY_TOOLS=deleteTask \
+  -e LOG_LEVEL=info \
+  ghcr.io/activ8-ai/teamwork-mcp:latest
+```
+
+### Available Tags
+
+- `latest` - Latest stable release from main branch
+- `sha-<commit>` - Specific commit SHA
+- `v<version>` - Tagged releases (when available)
+
+### Security Notes
+
+**Required Secrets**: When using GitHub Actions workflows, ensure these repository secrets are configured:
+- `TEAMWORK_DOMAIN` (required)
+- `TEAMWORK_API_TOKEN` (preferred) OR both `TEAMWORK_USERNAME` and `TEAMWORK_PASSWORD`
+
+**Tool Filtering**: Use `ALLOW_TOOLS` and `DENY_TOOLS` environment variables to control which MCP tools are available, following the format: `tool1,tool2,tool3`
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/Vizioz/Teamwork-MCP?tab=MIT-1-ov-file#readme) file for details.

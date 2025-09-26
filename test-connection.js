@@ -1,9 +1,10 @@
-const axios = require('axios');
-const fs = require('fs');
+import axios from 'axios';
+import fs from 'fs';
+import dotenv from 'dotenv';
 
 // Load environment variables from .env file if it exists
 if (fs.existsSync('.env')) {
-  require('dotenv').config();
+  dotenv.config();
 }
 
 // Get configuration from environment variables
