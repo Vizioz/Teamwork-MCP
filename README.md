@@ -524,3 +524,4 @@ Multi‑Agent Orchestration
 
 - Enqueue handoff: tool `enqueueHandoff`
 - Dispatch queued events: `npm run orchestrator:dispatch` (routes to Notion Relay / Prime / Claude adapters)
+- Notion Relay webhooks: `npm run relay:serve` (endpoints: `/webhook/prime`, `/webhook/clawed`, `/webhook/ancillary`)

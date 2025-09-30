@@ -16,6 +16,7 @@
     "inspector": "tsc && node -e \"const fs = require('fs'); if (fs.existsSync('.env.example')) { fs.copyFileSync('.env.example', 'build/.env'); } fs.chmodSync('build/index.js', '755')\" && npx @modelcontextprotocol/inspector build/index.js",
     "test-connection": "node test-connection.js",
     "orchestrator:dispatch": "node build/services/orchestration/dispatcher.js",
+    "relay:serve": "node build/servers/notion-relay-server.js",
     "status:badge": "node scripts/status-badge.js",
     "monitoring:create": "node scripts/create-monitoring-tasks.js"
   },
@@ -45,6 +46,7 @@
     "@types/minimist": "^1.2.5",
     "axios": "^1.8.2",
     "dotenv": "^16.4.5",
+    "express": "^5.1.0",
     "minimist": "^1.2.8",
     "winston": "^3.12.0"
   },

@@ -16,14 +16,17 @@ function parseLine(line: string): HandoffEvent | null {
 
 async function dispatch(event: HandoffEvent): Promise<void> {
 	for (const target of event.targets || []) {
-		switch ((target.name || '').toLowerCase()) {
+    switch ((target.name || '').toLowerCase()) {
 			case 'notionrelay':
 				await dispatchToNotionRelay(event);
 				break;
-			case 'primeagent':
+      case 'primeagent':
 				await dispatchToPrimeAgent(event);
 				break;
-			case 'claudeagent':
+      case 'claudeagent':
+      case 'clawedagent':
+      case 'claude':
+      case 'clawed':
 				await dispatchToClaudeAgent(event);
 				break;
 			default:
