@@ -56,6 +56,9 @@ import { getProjectsAllocationsTimeDefinition as getAllocationTime, handleGetPro
 import { getTimezonesDefinition as getTimezones, handleGetTimezones } from './core/getTimezones.js';
 // Orchestration
 import { enqueueHandoffDefinition as enqueueHandoff, handleEnqueueHandoff } from './orchestration/enqueueHandoff.js';
+// Conversations
+import { ingestConversationEventDefinition as ingestConversationEvent, handleIngestConversationEvent } from './conversations/ingestEvent.js';
+import { synthesizeConversationThreadDefinition as synthesizeConversationThread, handleSynthesizeConversationThread } from './conversations/synthesizeThread.js';
 
 // Define a structure that pairs tool definitions with their handlers
 interface ToolPair {
@@ -102,6 +105,8 @@ const toolPairs: ToolPair[] = [
   { definition: getProjectsReportingUtilization, handler: handleGetProjectsReportingUtilization },
   { definition: getTimezones, handler: handleGetTimezones }
   ,{ definition: enqueueHandoff, handler: handleEnqueueHandoff }
+  ,{ definition: ingestConversationEvent, handler: handleIngestConversationEvent }
+  ,{ definition: synthesizeConversationThread, handler: handleSynthesizeConversationThread }
 ];
 
 // Extract just the definitions for the toolDefinitions array

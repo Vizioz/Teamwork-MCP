@@ -11,6 +11,7 @@ This repository follows the Charter Standard and Academic Framework (McKinsey/Ba
 - See `docs/charter-standard.md` for principles and delivery framework
 - See `docs/governance.md` for roles, decision records, CI, and security practices
 - See `docs/tao-multi-agent-codex.md` and `docs/orchestration.md` for multi‑agent orchestration
+- See `docs/conversation-review.md` for the Conversation Review standard
 - See `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, and `SECURITY.md` for collaboration and security policies
 
 

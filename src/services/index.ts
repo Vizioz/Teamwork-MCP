@@ -43,6 +43,8 @@ import getCompanyById from './companies/getCompanyById.js';
 import getTime, { GetTimeParams } from './time/getTime.js';
 import getTimezones from './core/getTimezones.js';
 import enqueueHandoff from './orchestration/enqueueHandoff.js';
+import ingestEvent from './conversations/ingestEvent.js';
+import synthesizeThread from './conversations/synthesizeThread.js';
 
 // Reporting exports
 import getUserTaskCompletion from './reporting/getUserTaskCompletion.js';
@@ -58,6 +60,7 @@ export { getTime, GetTimeParams };
 export { getUserTaskCompletion, getUtilizationCsv };
 export { getTimezones };
 export { enqueueHandoff };
+export { ingestEvent, synthesizeThread };
 
 // Default export with all services
 export default {
@@ -109,5 +112,9 @@ export default {
   getTimezones,
 
   // Orchestration
-  enqueueHandoff
+  enqueueHandoff,
+
+  // Conversations
+  ingestEvent,
+  synthesizeThread
 };  
