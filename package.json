@@ -17,6 +17,7 @@
     "test-connection": "node test-connection.js",
     "orchestrator:dispatch": "node build/services/orchestration/dispatcher.js",
     "relay:serve": "node build/servers/notion-relay-server.js",
+    "relay:test": "RELAY_SECRET=testsecret node tests/relay-contract.test.js",
     "status:badge": "node scripts/status-badge.js",
     "monitoring:create": "node scripts/create-monitoring-tasks.js"
   },
