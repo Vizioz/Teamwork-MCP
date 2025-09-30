@@ -14,7 +14,10 @@
     "prepare": "npm run build",
     "watch": "tsc --watch",
     "inspector": "tsc && node -e \"const fs = require('fs'); if (fs.existsSync('.env.example')) { fs.copyFileSync('.env.example', 'build/.env'); } fs.chmodSync('build/index.js', '755')\" && npx @modelcontextprotocol/inspector build/index.js",
-    "test-connection": "node test-connection.js"
+    "test-connection": "node test-connection.js",
+    "orchestrator:dispatch": "node build/services/orchestration/dispatcher.js",
+    "status:badge": "node scripts/status-badge.js",
+    "monitoring:create": "node scripts/create-monitoring-tasks.js"
   },
   "files": [
     "build",

@@ -1,0 +1,7 @@
+title,description,assignees,due_in_days,priority
+Initialize monitoring stack,Provision and verify monitoring tools,,0,high
+Instrument Teamwork project,Set up task metrics and utilization tracking,,0,normal
+Daily health check T+24,Run health checks and log results,,1,normal
+Daily health check T+48,Run health checks and log results,,2,normal
+Daily health check T+72,Run health checks and log results,,3,normal
+Report summary,Compile summary and publish status,,3,normal

@@ -503,3 +503,10 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 ## Disclaimer
 
 This project is not affiliated with, endorsed by, or sponsored by Teamwork.com. The use of the name "Teamwork" in the package name (@vizioz/teamwork-mcp) is solely for descriptive purposes to indicate compatibility with the Teamwork.com API.
+
+Status
+------
+
+- Meta·Mega portal status source: `codex-portal/layer-1-governance/charter-standard-execution.json`
+- Shields endpoint (local): `node scripts/status-badge.js` → returns JSON for Shields.io dynamic endpoint
+- You can publish this via a small serverless endpoint to expose a public badge
