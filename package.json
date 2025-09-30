@@ -23,7 +23,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vizioz/teamwork-mcp.git"
+    "url": "git+https://github.com/activ8-ai/teamwork-mcp.git"
   },
   "keywords": [
     "teamwork",
@@ -34,9 +34,9 @@
   "author": "Chris Houston",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vizioz/teamwork-mcp/issues"
+    "url": "https://github.com/activ8-ai/teamwork-mcp/issues"
   },
-  "homepage": "https://github.com/vizioz/teamwork-mcp#readme",
+  "homepage": "https://github.com/activ8-ai/teamwork-mcp#readme",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.6.1",
     "@types/minimist": "^1.2.5",

@@ -1,0 +1,3 @@
+* text=auto eol=lf
+*.ts diff=ts linguist-language=TypeScript
+*.md text

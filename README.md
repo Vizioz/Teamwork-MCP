@@ -1,8 +1,17 @@
 # Teamwork MCP
 
-[![npm version](https://img.shields.io/npm/v/@vizioz/teamwork-mcp.svg)](https://www.npmjs.com/package/@vizioz/teamwork-mcp) [![Verified on MseeP](https://mseep.ai/badge.svg)](https://mseep.ai/app/d18e81f9-f526-4751-841e-b57a0d70b5c0)
+[![npm version](https://img.shields.io/npm/v/@vizioz/teamwork-mcp.svg)](https://www.npmjs.com/package/@vizioz/teamwork-mcp)
 
 An MCP server that connects to the Teamwork API, providing a simplified interface for interacting with Teamwork projects and tasks.
+Governance & Charter Standard
+-----------------------------
+
+This repository follows the Charter Standard and Academic Framework (McKinsey/Bain/BCG-inspired) for clarity, evidence-based decisions, and rigorous governance.
+
+- See `docs/charter-standard.md` for principles and delivery framework
+- See `docs/governance.md` for roles, decision records, CI, and security practices
+- See `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, and `SECURITY.md` for collaboration and security policies
+
 
 ## Features
 
@@ -489,7 +498,7 @@ docker run -it --rm \
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/Vizioz/Teamwork-MCP?tab=MIT-1-ov-file#readme) file for details.
+This project is licensed under the MIT License - see the `LICENSE` file for details.
 
 ## Disclaimer
 
