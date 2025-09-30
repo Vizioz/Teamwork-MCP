@@ -25,3 +25,4 @@ This repository follows a pragmatic governance model:
 
 - README is entry point; docs folder for standards
 - Keep examples updated when APIs change
+ - See `operational-execution-charter.md` for the CIS operating mode and accountabilities
