@@ -42,6 +42,7 @@ import getCompanyById from './companies/getCompanyById.js';
 // Time-related exports
 import getTime, { GetTimeParams } from './time/getTime.js';
 import getTimezones from './core/getTimezones.js';
+import enqueueHandoff from './orchestration/enqueueHandoff.js';
 
 // Reporting exports
 import getUserTaskCompletion from './reporting/getUserTaskCompletion.js';
@@ -56,6 +57,7 @@ export { createCompany, updateCompany, deleteCompany, getCompanies, getCompanyBy
 export { getTime, GetTimeParams };
 export { getUserTaskCompletion, getUtilizationCsv };
 export { getTimezones };
+export { enqueueHandoff };
 
 // Default export with all services
 export default {
@@ -104,5 +106,8 @@ export default {
   getUtilizationCsv,
 
   // Core
-  getTimezones
+  getTimezones,
+
+  // Orchestration
+  enqueueHandoff
 };  
