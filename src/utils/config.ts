@@ -253,7 +253,8 @@ const toolGroups: Record<string, string[]> = {
   'Reporting': ['getProjectsReportingUserTaskCompletion', 'getProjectsReportingUtilization'],
   'Time': ['getTime', 'getProjectsAllocationsTime', 'getTimezones'],
   'Comments': ['createComment'],
-  'Companies': ['createCompany', 'updateCompany', 'deleteCompany', 'getCompanies', 'getCompanyById']
+  'Companies': ['createCompany', 'updateCompany', 'deleteCompany', 'getCompanies', 'getCompanyById'],
+  'Orchestration': ['enqueueHandoff']
 };
 
 // Expand allow and deny lists based on groups

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 function main() {
 	const registerPath = path.resolve(process.cwd(), 'codex-portal', 'layer-1-governance', 'charter-standard-execution.json');

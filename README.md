@@ -10,6 +10,7 @@ This repository follows the Charter Standard and Academic Framework (McKinsey/Ba
 
 - See `docs/charter-standard.md` for principles and delivery framework
 - See `docs/governance.md` for roles, decision records, CI, and security practices
+- See `docs/tao-multi-agent-codex.md` and `docs/orchestration.md` for multi‑agent orchestration
 - See `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, and `SECURITY.md` for collaboration and security policies
 
 
@@ -510,3 +511,16 @@ Status
 - Meta·Mega portal status source: `codex-portal/layer-1-governance/charter-standard-execution.json`
 - Shields endpoint (local): `node scripts/status-badge.js` → returns JSON for Shields.io dynamic endpoint
 - You can publish this via a small serverless endpoint to expose a public badge
+
+72‑Hour Monitoring Kit
+----------------------
+
+- CSV: `teamwork-72hour-monitoring/tasks.csv`
+- Setup guide: `teamwork-72hour-monitoring/setup.md`
+- Creator script: `npm run monitoring:create` (requires `.teamwork` with `TASKLISTID` or `TASKLISTID` env)
+
+Multi‑Agent Orchestration
+-------------------------
+
+- Enqueue handoff: tool `enqueueHandoff`
+- Dispatch queued events: `npm run orchestrator:dispatch` (routes to Notion Relay / Prime / Claude adapters)

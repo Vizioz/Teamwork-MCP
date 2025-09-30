@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
-const readline = require('readline');
+import fs from 'fs';
+import path from 'path';
+import readline from 'readline';
 
 async function readCsv(filePath) {
 	const fileStream = fs.createReadStream(filePath);
@@ -35,9 +35,7 @@ async function main() {
 	}
 	const tasksPath = path.resolve(process.cwd(), 'teamwork-72hour-monitoring', 'tasks.csv');
 	const tasks = await readCsv(tasksPath);
-	const { createRequire } = require('module');
-	const req = createRequire(import.meta ? import.meta.url : __filename);
-	const svc = req('../build/services/index.js');
+    const svc = await import('../build/services/index.js');
 	for (const t of tasks) {
 		const payload = {
 			task: {
@@ -46,7 +44,7 @@ async function main() {
 				priority: (t.priority || 'normal')
 			}
 		};
-		await svc.createTask(String(tasklistId), payload);
+        await svc.createTask(String(tasklistId), payload);
 		console.log(`Created: ${t.title}`);
 	}
 }
