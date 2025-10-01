@@ -1,8 +1,24 @@
 # Teamwork MCP
 
-[![npm version](https://img.shields.io/npm/v/@vizioz/teamwork-mcp.svg)](https://www.npmjs.com/package/@vizioz/teamwork-mcp) [![Verified on MseeP](https://mseep.ai/badge.svg)](https://mseep.ai/app/d18e81f9-f526-4751-841e-b57a0d70b5c0)
+[![npm version](https://img.shields.io/npm/v/@vizioz/teamwork-mcp.svg)](https://www.npmjs.com/package/@vizioz/teamwork-mcp)
 
 An MCP server that connects to the Teamwork API, providing a simplified interface for interacting with Teamwork projects and tasks.
+Governance & Charter Standard
+-----------------------------
+
+This repository follows the Charter Standard and Academic Framework (McKinsey/Bain/BCG-inspired) for clarity, evidence-based decisions, and rigorous governance.
+
+- See `docs/charter-standard.md` for principles and delivery framework
+- See `docs/governance.md` for roles, decision records, CI, and security practices
+- See `docs/tao-multi-agent-codex.md` and `docs/orchestration.md` for multi‑agent orchestration
+- See `docs/conversation-review.md` for the Conversation Review standard
+
+Operational Mode
+----------------
+
+- Operating under the Compounding Intelligence System (CIS) in alignment with the Operational Execution & Accountability Charter: see `docs/operational-execution-charter.md`.
+- See `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, and `SECURITY.md` for collaboration and security policies
+
 
 ## Features
 
@@ -489,8 +505,29 @@ docker run -it --rm \
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/Vizioz/Teamwork-MCP?tab=MIT-1-ov-file#readme) file for details.
+This project is licensed under the MIT License - see the `LICENSE` file for details.
 
 ## Disclaimer
 
 This project is not affiliated with, endorsed by, or sponsored by Teamwork.com. The use of the name "Teamwork" in the package name (@vizioz/teamwork-mcp) is solely for descriptive purposes to indicate compatibility with the Teamwork.com API.
+
+Status
+------
+
+- Meta·Mega portal status source: `codex-portal/layer-1-governance/charter-standard-execution.json`
+- Shields endpoint (local): `node scripts/status-badge.js` → returns JSON for Shields.io dynamic endpoint
+- You can publish this via a small serverless endpoint to expose a public badge
+
+72‑Hour Monitoring Kit
+----------------------
+
+- CSV: `teamwork-72hour-monitoring/tasks.csv`
+- Setup guide: `teamwork-72hour-monitoring/setup.md`
+- Creator script: `npm run monitoring:create` (requires `.teamwork` with `TASKLISTID` or `TASKLISTID` env)
+
+Multi‑Agent Orchestration
+-------------------------
+
+- Enqueue handoff: tool `enqueueHandoff`
+- Dispatch queued events: `npm run orchestrator:dispatch` (routes to Notion Relay / Prime / Claude adapters)
+- Notion Relay webhooks: `npm run relay:serve` (endpoints: `/webhook/prime`, `/webhook/clawed`, `/webhook/ancillary`)

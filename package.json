@@ -14,7 +14,12 @@
     "prepare": "npm run build",
     "watch": "tsc --watch",
     "inspector": "tsc && node -e \"const fs = require('fs'); if (fs.existsSync('.env.example')) { fs.copyFileSync('.env.example', 'build/.env'); } fs.chmodSync('build/index.js', '755')\" && npx @modelcontextprotocol/inspector build/index.js",
-    "test-connection": "node test-connection.js"
+    "test-connection": "node test-connection.js",
+    "orchestrator:dispatch": "node build/services/orchestration/dispatcher.js",
+    "relay:serve": "node build/servers/notion-relay-server.js",
+    "relay:test": "RELAY_SECRET=testsecret node tests/relay-contract.test.js",
+    "status:badge": "node scripts/status-badge.js",
+    "monitoring:create": "node scripts/create-monitoring-tasks.js"
   },
   "files": [
     "build",
@@ -23,7 +28,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vizioz/teamwork-mcp.git"
+    "url": "git+https://github.com/activ8-ai/teamwork-mcp.git"
   },
   "keywords": [
     "teamwork",
@@ -34,14 +39,15 @@
   "author": "Chris Houston",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vizioz/teamwork-mcp/issues"
+    "url": "https://github.com/activ8-ai/teamwork-mcp/issues"
   },
-  "homepage": "https://github.com/vizioz/teamwork-mcp#readme",
+  "homepage": "https://github.com/activ8-ai/teamwork-mcp#readme",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.6.1",
     "@types/minimist": "^1.2.5",
     "axios": "^1.8.2",
     "dotenv": "^16.4.5",
+    "express": "^5.1.0",
     "minimist": "^1.2.8",
     "winston": "^3.12.0"
   },
