@@ -14,15 +14,21 @@
     "prepare": "npm run build",
     "watch": "tsc --watch",
     "inspector": "tsc && node -e \"const fs = require('fs'); if (fs.existsSync('.env.example')) { fs.copyFileSync('.env.example', 'build/.env'); } fs.chmodSync('build/index.js', '755')\" && npx @modelcontextprotocol/inspector build/index.js",
-    "test-connection": "node -e \"const axios = require('axios'); const fs = require('fs'); require('dotenv').config(); const domain = process.env.TEAMWORK_DOMAIN; const username = process.env.TEAMWORK_USERNAME; const password = process.env.TEAMWORK_PASSWORD; if (!domain || !username || !password) { console.error('Missing required environment variables'); process.exit(1); } const url = `https://${domain}.teamwork.com/projects/api/v3/projects.json`; console.log(`Testing connection to ${url}`); const auth = Buffer.from(`${username}:${password}`).toString('base64'); axios.get(url, { headers: { Authorization: `Basic ${auth}` } }).then(res => { console.log('Connection successful!'); console.log(`Status: ${res.status}`); console.log(`Data: ${JSON.stringify(res.data).substring(0, 200)}...`); }).catch(err => { console.error('Connection failed!'); console.error(`Error: ${err.message}`); if (err.response) { console.error(`Status: ${err.response.status}`); console.error(`Data: ${JSON.stringify(err.response.data)}`); } process.exit(1); });\""
+    "test-connection": "node test-connection.js",
+    "orchestrator:dispatch": "node build/services/orchestration/dispatcher.js",
+    "relay:serve": "node build/servers/notion-relay-server.js",
+    "relay:test": "RELAY_SECRET=testsecret node tests/relay-contract.test.js",
+    "status:badge": "node scripts/status-badge.js",
+    "monitoring:create": "node scripts/create-monitoring-tasks.js"
   },
   "files": [
     "build",
-    "README.md"
+    "README.md",
+    "test-connection.js"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vizioz/teamwork-mcp.git"
+    "url": "git+https://github.com/activ8-ai/teamwork-mcp.git"
   },
   "keywords": [
     "teamwork",
@@ -33,20 +39,30 @@
   "author": "Chris Houston",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vizioz/teamwork-mcp/issues"
+    "url": "https://github.com/activ8-ai/teamwork-mcp/issues"
   },
-  "homepage": "https://github.com/vizioz/teamwork-mcp#readme",
+  "homepage": "https://github.com/activ8-ai/teamwork-mcp#readme",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.6.1",
     "@types/minimist": "^1.2.5",
     "axios": "^1.8.2",
     "dotenv": "^16.4.5",
+    "express": "^5.1.0",
     "minimist": "^1.2.8",
     "winston": "^3.12.0"
   },
   "devDependencies": {
+    "@types/body-parser": "^1.19.6",
+    "@types/connect": "^3.4.38",
     "@types/express": "^5.0.0",
+    "@types/http-errors": "^2.0.5",
+    "@types/mime": "^3.0.4",
     "@types/node": "^22.10.0",
+    "@types/qs": "^6.14.0",
+    "@types/range-parser": "^1.2.7",
+    "@types/send": "^0.17.5",
+    "@types/serve-static": "^1.15.8",
+    "@types/triple-beam": "^1.3.5",
     "tsx": "^4.19.3",
     "typescript": "^5.8.2"
   }

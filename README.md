@@ -1,8 +1,24 @@
 # Teamwork MCP
 
-[![npm version](https://img.shields.io/npm/v/@vizioz/teamwork-mcp.svg)](https://www.npmjs.com/package/@vizioz/teamwork-mcp) [![Verified on MseeP](https://mseep.ai/badge.svg)](https://mseep.ai/app/d18e81f9-f526-4751-841e-b57a0d70b5c0)
+[![npm version](https://img.shields.io/npm/v/@vizioz/teamwork-mcp.svg)](https://www.npmjs.com/package/@vizioz/teamwork-mcp)
 
 An MCP server that connects to the Teamwork API, providing a simplified interface for interacting with Teamwork projects and tasks.
+Governance & Charter Standard
+-----------------------------
+
+This repository follows the Charter Standard and Academic Framework (McKinsey/Bain/BCG-inspired) for clarity, evidence-based decisions, and rigorous governance.
+
+- See `docs/charter-standard.md` for principles and delivery framework
+- See `docs/governance.md` for roles, decision records, CI, and security practices
+- See `docs/tao-multi-agent-codex.md` and `docs/orchestration.md` for multi‑agent orchestration
+- See `docs/conversation-review.md` for the Conversation Review standard
+
+Operational Mode
+----------------
+
+- Operating under the Compounding Intelligence System (CIS) in alignment with the Operational Execution & Accountability Charter: see `docs/operational-execution-charter.md`.
+- See `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, and `SECURITY.md` for collaboration and security policies
+
 
 ## Features
 
@@ -429,10 +445,89 @@ To run the MCP inspector for debugging:
 npm run inspector
 ```
 
+## Container Usage (GHCR)
+
+The Teamwork MCP server is available as a Docker container from GitHub Container Registry. This provides an easy way to run the server in any containerized environment.
+
+### Pull and Run
+
+Pull the latest image from GHCR:
+
+```bash
+docker pull ghcr.io/activ8-ai/teamwork-mcp:latest
+```
+
+Run the container with your Teamwork credentials:
+
+```bash
+# Using API Token (recommended)
+docker run -it --rm \
+  -e TEAMWORK_DOMAIN=your-company \
+  -e TEAMWORK_API_TOKEN=your-api-token \
+  ghcr.io/activ8-ai/teamwork-mcp:latest
+
+# Using Username/Password
+docker run -it --rm \
+  -e TEAMWORK_DOMAIN=your-company \
+  -e TEAMWORK_USERNAME=your-email@example.com \
+  -e TEAMWORK_PASSWORD=your-password \
+  ghcr.io/activ8-ai/teamwork-mcp:latest
+```
+
+### Optional Environment Variables
+
+You can also set additional configuration:
+
+```bash
+docker run -it --rm \
+  -e TEAMWORK_DOMAIN=your-company \
+  -e TEAMWORK_API_TOKEN=your-api-token \
+  -e TEAMWORK_PROJECT_ID=123456 \
+  -e ALLOW_TOOLS=getProjects,getTasks,createTask \
+  -e DENY_TOOLS=deleteTask \
+  -e LOG_LEVEL=info \
+  ghcr.io/activ8-ai/teamwork-mcp:latest
+```
+
+### Available Tags
+
+- `latest` - Latest stable release from main branch
+- `sha-<commit>` - Specific commit SHA
+- `v<version>` - Tagged releases (when available)
+
+### Security Notes
+
+**Required Secrets**: When using GitHub Actions workflows, ensure these repository secrets are configured:
+- `TEAMWORK_DOMAIN` (required)
+- `TEAMWORK_API_TOKEN` (preferred) OR both `TEAMWORK_USERNAME` and `TEAMWORK_PASSWORD`
+
+**Tool Filtering**: Use `ALLOW_TOOLS` and `DENY_TOOLS` environment variables to control which MCP tools are available, following the format: `tool1,tool2,tool3`
+
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/Vizioz/Teamwork-MCP?tab=MIT-1-ov-file#readme) file for details.
+This project is licensed under the MIT License - see the `LICENSE` file for details.
 
 ## Disclaimer
 
 This project is not affiliated with, endorsed by, or sponsored by Teamwork.com. The use of the name "Teamwork" in the package name (@vizioz/teamwork-mcp) is solely for descriptive purposes to indicate compatibility with the Teamwork.com API.
+
+Status
+------
+
+- Meta·Mega portal status source: `codex-portal/layer-1-governance/charter-standard-execution.json`
+- Shields endpoint (local): `node scripts/status-badge.js` → returns JSON for Shields.io dynamic endpoint
+- You can publish this via a small serverless endpoint to expose a public badge
+
+72‑Hour Monitoring Kit
+----------------------
+
+- CSV: `teamwork-72hour-monitoring/tasks.csv`
+- Setup guide: `teamwork-72hour-monitoring/setup.md`
+- Creator script: `npm run monitoring:create` (requires `.teamwork` with `TASKLISTID` or `TASKLISTID` env)
+
+Multi‑Agent Orchestration
+-------------------------
+
+- Enqueue handoff: tool `enqueueHandoff`
+- Dispatch queued events: `npm run orchestrator:dispatch` (routes to Notion Relay / Prime / Claude adapters)
+- Notion Relay webhooks: `npm run relay:serve` (endpoints: `/webhook/prime`, `/webhook/clawed`, `/webhook/ancillary`)
