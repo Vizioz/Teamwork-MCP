@@ -25,4 +25,18 @@ jobs:
       - run: npm test
         if: ${{ false }}  # Skip tests for now, add them later when available
       # Publish uses OIDC - no token needed
-      - run: npm publish 
+      # Determine if this is a prerelease version and set appropriate tag
+      - name: Publish to npm
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          if [[ "$VERSION" == *"-alpha"* ]]; then
+            npm publish --tag alpha
+          elif [[ "$VERSION" == *"-beta"* ]]; then
+            npm publish --tag beta
+          elif [[ "$VERSION" == *"-rc"* ]]; then
+            npm publish --tag rc
+          elif [[ "$VERSION" == *"-"* ]]; then
+            npm publish --tag next
+          else
+            npm publish
+          fi 

@@ -1,10 +1,10 @@
 {
   "name": "@vizioz/teamwork-mcp",
-  "version": "0.1.17-alpha",
+  "version": "0.1.17",
   "description": "MCP server to connect to the Teamwork.com API",
   "type": "module",
   "bin": {
-    "teamwork-mcp": "./build/index.js"
+    "teamwork-mcp": "build/index.js"
   },
   "publishConfig": {
     "access": "public"
