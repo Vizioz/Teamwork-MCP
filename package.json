@@ -1,6 +1,6 @@
 {
   "name": "@vizioz/teamwork-mcp",
-  "version": "0.1.16-alpha",
+  "version": "0.1.17-alpha",
   "description": "MCP server to connect to the Teamwork.com API",
   "type": "module",
   "bin": {
@@ -37,17 +37,17 @@
   },
   "homepage": "https://github.com/vizioz/teamwork-mcp#readme",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.6.1",
+    "@modelcontextprotocol/sdk": "^1.24.2",
     "@types/minimist": "^1.2.5",
-    "axios": "^1.8.2",
-    "dotenv": "^16.4.5",
+    "axios": "^1.13.2",
+    "dotenv": "^17.2.3",
     "minimist": "^1.2.8",
-    "winston": "^3.12.0"
+    "winston": "^3.18.3"
   },
   "devDependencies": {
-    "@types/express": "^5.0.0",
-    "@types/node": "^22.10.0",
-    "tsx": "^4.19.3",
-    "typescript": "^5.8.2"
+    "@types/express": "^5.0.6",
+    "@types/node": "^24.10.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
   }
 }
