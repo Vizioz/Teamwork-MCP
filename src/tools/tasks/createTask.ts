@@ -6,6 +6,7 @@
 import logger from "../../utils/logger.js";
 import teamworkService from "../../services/index.js";
 import { TaskRequest } from "../../models/TaskRequest.js";
+import { createErrorResponse } from "../../utils/errorHandler.js";
 
 export const createTaskDefinition = {
   name: "createTask",
@@ -625,24 +626,6 @@ export async function handleCreateTask(input: any) {
     logger.info("=== createTask tool completed successfully ===");
     return response;
   } catch (error: any) {
-    logger.error(`Error in createTask handler: ${error.message}`);
-    if (error.stack) {
-      logger.error(`Stack trace: ${error.stack}`);
-    }
-    if (error.response) {
-      logger.error(`API response error: ${JSON.stringify({
-        status: error.response.status,
-        statusText: error.response.statusText,
-        data: error.response.data
-      })}`);
-    }
-    
-    // Return a properly formatted error response
-    return {
-      content: [{
-        type: "text",
-        text: `Error creating task: ${error.message}`
-      }]
-    };
+    return createErrorResponse(error, 'Creating task');
   }
 } 

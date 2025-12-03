@@ -1,4 +1,5 @@
 import { getPeopleUtilization } from '../../services/people/getPeopleUtilization.js';
+import { createErrorResponse } from '../../utils/errorHandler.js';
 
 export const getProjectsPeopleUtilizationDefinition = {
   name: "getProjectsPeopleUtilization",
@@ -188,19 +189,19 @@ export const getProjectsPeopleUtilizationDefinition = {
         },
         description: 'include additional data'
       },
-      'fields[utilizations]': {
+      fieldsUtilizations: {
         type: 'array',
         items: {
           type: 'string'
         },
-        description: 'specific utilization fields to include'
+        description: 'Query parameter: fields[utilizations] - specific utilization fields to include'
       },
-      'fields[users]': {
+      fieldsUsers: {
         type: 'array',
         items: {
           type: 'string'
         },
-        description: 'specific user fields to include'
+        description: 'Query parameter: fields[users] - specific user fields to include'
       },
       companyIds: {
         type: 'array',
@@ -220,8 +221,24 @@ export const getProjectsPeopleUtilizationDefinition = {
 };
 
 export async function handleGetProjectsPeopleUtilization(input: any) {
+  // Map camelCase field names back to API format
+  const apiInput: Record<string, any> = { ...input };
+
+  // Define the mapping for fields[...] parameters
+  const fieldMappings: Record<string, string> = {
+    fieldsUtilizations: "fields[utilizations]",
+    fieldsUsers: "fields[users]",
+  };
+
+  for (const [camelCaseKey, apiKey] of Object.entries(fieldMappings)) {
+    if (apiInput[camelCaseKey] !== undefined) {
+      apiInput[apiKey] = apiInput[camelCaseKey];
+      delete apiInput[camelCaseKey];
+    }
+  }
+
   try {
-    const response = await getPeopleUtilization(input);
+    const response = await getPeopleUtilization(apiInput);
     return {
       content: [{
         type: "text",
@@ -229,11 +246,6 @@ export async function handleGetProjectsPeopleUtilization(input: any) {
       }]
     };
   } catch (error: any) {
-    return {
-      content: [{
-        type: "text",
-        text: `Error: ${error.message}`
-      }]
-    };
+    return createErrorResponse(error, 'Getting people utilization');
   }
 } 

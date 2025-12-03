@@ -5,6 +5,7 @@
 
 import logger from "../../utils/logger.js";
 import teamworkService from "../../services/index.js";
+import { createErrorResponse } from "../../utils/errorHandler.js";
 
 // Tool definition
 export const deleteTaskDefinition = {
@@ -49,12 +50,6 @@ export async function handleDeleteTask(input: any) {
       }]
     };
   } catch (error: any) {
-    logger.error(`Error in deleteTask handler: ${error.message}`);
-    return {
-      content: [{
-        type: "text",
-        text: `Error deleting task: ${error.message}`
-      }]
-    };
+    return createErrorResponse(error, 'Deleting task');
   }
 } 

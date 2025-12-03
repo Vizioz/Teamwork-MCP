@@ -5,6 +5,7 @@
 
 import logger from "../../utils/logger.js";
 import teamworkService from "../../services/index.js";
+import { createErrorResponse } from "../../utils/errorHandler.js";
 
 // Tool definition
 export const getPeopleDefinition = {
@@ -129,12 +130,6 @@ export async function handleGetPeople(input: any) {
       };
     }
   } catch (error: any) {
-    logger.error(`Error in getPeople tool: ${error.message}`);
-    return {
-      content: [{
-        type: "text",
-        text: `Error: ${error.message}`
-      }]
-    };
+    return createErrorResponse(error, 'Retrieving people');
   }
 } 

@@ -5,6 +5,7 @@
 
 import logger from "../../utils/logger.js";
 import teamworkService from "../../services/index.js";
+import { createErrorResponse } from "../../utils/errorHandler.js";
 
 // Tool definition
 export const getCurrentProjectDefinition = {
@@ -47,12 +48,6 @@ export async function handleGetCurrentProject(input: any) {
       }]
     };
   } catch (error: any) {
-    logger.error(`Error in getCurrentProject handler: ${error.message}`);
-    return {
-      content: [{
-        type: "text",
-        text: `Error retrieving current project: ${error.message}`
-      }]
-    };
+    return createErrorResponse(error, 'Retrieving current project');
   }
 } 

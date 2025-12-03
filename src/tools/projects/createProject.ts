@@ -5,6 +5,7 @@
 
 import logger from "../../utils/logger.js";
 import teamworkService, { CreateProjectData } from "../../services/index.js";
+import { createErrorResponse } from "../../utils/errorHandler.js";
 
 // Tool definition
 export const createProjectDefinition = {
@@ -92,12 +93,6 @@ export async function handleCreateProject(input: any) {
       }]
     };
   } catch (error: any) {
-    logger.error(`Error in createProject handler: ${error.message}`);
-    return {
-      content: [{
-        type: "text",
-        text: `Error creating project: ${error.message}`
-      }]
-    };
+    return createErrorResponse(error, 'Creating project');
   }
 } 

@@ -1,4 +1,5 @@
 import { getAllocationTime as getAllocationTimeService } from '../../services/time/getAllocationTime.js';
+import { createErrorResponse } from '../../utils/errorHandler.js';
 
 export const getProjectsAllocationsTimeDefinition = {
   name: "getProjectsAllocationsTime",
@@ -84,11 +85,6 @@ export async function handleGetProjectsAllocationsTime(input: any) {
       }]
     };
   } catch (error: any) {
-    return {
-      content: [{
-        type: "text",
-        text: `Error: ${error.message}`
-      }]
-    };
+    return createErrorResponse(error, 'Getting allocation time entries');
   }
 } 

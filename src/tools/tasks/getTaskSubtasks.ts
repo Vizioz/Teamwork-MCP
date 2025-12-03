@@ -30,6 +30,7 @@
 
 import logger from "../../utils/logger.js";
 import { getApiClientForVersion } from "../../services/core/apiClient.js";
+import { createErrorResponse } from "../../utils/errorHandler.js";
 
 // Tool definition
 export const getTaskSubtasksDefinition = {
@@ -99,12 +100,6 @@ export async function handleGetTaskSubtasks(input: any) {
       }]
     };
   } catch (error: any) {
-    logger.error(`Error in getTaskSubtasks handler: ${error.message}`);
-    return {
-      content: [{
-        type: "text",
-        text: `Error: ${error.message}`
-      }]
-    };
+    return createErrorResponse(error, 'Retrieving task subtasks');
   }
 } 

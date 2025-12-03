@@ -1,4 +1,5 @@
 import { getPeopleMetricsPerformance } from '../../services/people/getPeopleMetricsPerformance.js';
+import { createErrorResponse } from '../../utils/errorHandler.js';
 
 export const getProjectsPeopleMetricsPerformanceDefinition = {
   name: "getProjectsPeopleMetricsPerformance",
@@ -42,11 +43,6 @@ export async function handleGetProjectsPeopleMetricsPerformance(input: any) {
       }]
     };
   } catch (error: any) {
-    return {
-      content: [{
-        type: "text",
-        text: `Error: ${error.message}`
-      }]
-    };
+    return createErrorResponse(error, 'Retrieving people performance metrics');
   }
 } 

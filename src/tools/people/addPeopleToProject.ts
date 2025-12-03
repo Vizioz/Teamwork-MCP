@@ -5,6 +5,7 @@
 
 import logger from "../../utils/logger.js";
 import teamworkService, { AddPeopleToProjectPayload } from "../../services/index.js";
+import { createErrorResponse } from "../../utils/errorHandler.js";
 
 // Tool definition
 export const addPeopleToProjectDefinition = {
@@ -115,12 +116,6 @@ export async function handleAddPeopleToProject(input: any) {
       };
     }
   } catch (error: any) {
-    logger.error(`Error in addPeopleToProject tool: ${error.message}`);
-    return {
-      content: [{
-        type: "text",
-        text: `Error: ${error.message}`
-      }]
-    };
+    return createErrorResponse(error, 'Adding people to project');
   }
 } 
