@@ -1,4 +1,4 @@
-import { loadConfig, constructApiUrl } from './utils/config.js';
+import { loadConfig } from './utils/config.js';
 import fs from 'fs';
 
 // Load configuration from environment variables, .env file, and command line arguments

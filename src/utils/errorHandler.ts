@@ -1,4 +1,3 @@
-import { AxiosError } from 'axios';
 import logger from './logger.js';
 
 /**

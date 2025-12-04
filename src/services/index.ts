@@ -45,7 +45,6 @@ import getTimezones from './core/getTimezones.js';
 
 // Reporting exports
 import getUserTaskCompletion from './reporting/getUserTaskCompletion.js';
-import getUtilizationCsv from './reporting/getUtilizationCsv.js';
 
 // Re-export all functions
 export { getProjects, getCurrentProject, createProject, CreateProjectData };
@@ -54,7 +53,7 @@ export { createComment };
 export { getPeople, PeopleQueryParams, getPersonById, getProjectPeople, addPeopleToProject, AddPeopleToProjectPayload, deletePerson, updatePerson, getPeopleMetricsPerformance, getPeopleUtilization, getProjectPerson };
 export { createCompany, updateCompany, deleteCompany, getCompanies, getCompanyById };
 export { getTime, GetTimeParams };
-export { getUserTaskCompletion, getUtilizationCsv };
+export { getUserTaskCompletion };
 export { getTimezones };
 
 // Default export with all services
@@ -101,7 +100,6 @@ export default {
 
   // Reporting
   getUserTaskCompletion,
-  getUtilizationCsv,
 
   // Core
   getTimezones

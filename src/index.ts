@@ -2,8 +2,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import {
   CallToolRequestSchema,
-  ListToolsRequestSchema,
-  Prompt
+  ListToolsRequestSchema
 } from "@modelcontextprotocol/sdk/types.js";
 
 import logger from "./utils/logger.js";
