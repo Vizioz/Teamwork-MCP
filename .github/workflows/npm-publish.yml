@@ -9,30 +9,41 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      
       - uses: actions/setup-node@v4
         with:
           node-version: '20.x'
-          # Note: Don't use registry-url here - it creates token-based auth that interferes with OIDC
+          registry-url: 'https://registry.npmjs.org'
+      
       # Ensure npm 11.5.1 or later is installed for trusted publishing
       - name: Update npm
         run: npm install -g npm@latest
+      
+      # Clear any auth token from .npmrc to ensure OIDC is used
+      - name: Configure npm for OIDC
+        run: |
+          # Remove token-based auth line, OIDC will be used instead
+          npm config delete //registry.npmjs.org/:_authToken 2>/dev/null || true
+          # Show npm config for debugging
+          echo "npm version: $(npm --version)"
+          echo "Registry: $(npm config get registry)"
+      
       - run: npm ci
       - run: npm run build
+      
       - run: npm test
-        if: ${{ false }}  # Skip tests for now, add them later when available
+        if: ${{ false }}  # Skip tests for now
+      
       # Publish uses OIDC trusted publishing - no token needed
-      # Configure registry and publish
       - name: Publish to npm
         run: |
-          # Configure npm registry
-          npm config set registry https://registry.npmjs.org/
-          
-          # Determine version and publish with appropriate tag
           VERSION=$(node -p "require('./package.json').version")
+          echo "Publishing version: $VERSION"
+          
           if [[ "$VERSION" == *"-alpha"* ]]; then
             npm publish --tag alpha
           elif [[ "$VERSION" == *"-beta"* ]]; then
