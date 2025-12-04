@@ -38,9 +38,15 @@ jobs:
       - run: npm test
         if: ${{ false }}  # Skip tests for now
       
-      # Publish uses OIDC trusted publishing - no token needed
+      # Publish uses OIDC trusted publishing - explicitly unset any token to force OIDC
       - name: Publish to npm
+        env:
+          NODE_AUTH_TOKEN: ''  # Clear any inherited token to force OIDC
         run: |
+          # Remove any auth token from npmrc to ensure OIDC is used
+          sed -i '/_authToken/d' ~/.npmrc 2>/dev/null || true
+          sed -i '/_authToken/d' "$NPM_CONFIG_USERCONFIG" 2>/dev/null || true
+          
           VERSION=$(node -p "require('./package.json').version")
           echo "Publishing version: $VERSION"
           
