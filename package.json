@@ -1,5 +1,5 @@
 {
-  "name": "@vizioz/teamwork-mcp",
+  "name": "@Vizioz/Teamwork-MCP",
   "version": "0.1.20",
   "description": "MCP server to connect to the Teamwork.com API",
   "type": "module",

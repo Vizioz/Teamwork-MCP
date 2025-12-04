@@ -20,7 +20,7 @@ import {
 const mcpServer = new McpServer(
   {
     name: 'teamwork-mcp',
-    version: '0.1.19'
+    version: '0.1.20'
   },
   {
     capabilities: {
@@ -196,7 +196,7 @@ async function main() {
         // Log startup information to file only
         logger.info('=== Teamwork MCP Server Starting ===');
         logger.info(`Server name: teamwork-mcp`);
-        logger.info(`Server version: 0.1.19`);
+        logger.info(`Server version: 0.1.20`);
         logger.info(`Node.js version: ${process.version}`);
         logger.info(`Environment: ${process.env.NODE_ENV || 'development'}`);
         
