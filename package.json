@@ -37,7 +37,7 @@
   },
   "homepage": "https://github.com/vizioz/teamwork-mcp#readme",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.24.2",
+    "@modelcontextprotocol/sdk": "^1.25.2",
     "@types/minimist": "^1.2.5",
     "axios": "^1.13.2",
     "dotenv": "^17.2.3",
