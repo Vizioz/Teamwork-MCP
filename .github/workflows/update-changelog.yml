@@ -9,6 +9,15 @@ on:
       version:
         description: 'Version number (e.g., 0.1.17-alpha)'
         required: false
+      pr_number:
+        description: 'PR number to generate changelog entry from (required for manual dispatch)'
+        required: false
+      pr_title:
+        description: 'Optional override for PR title (manual dispatch)'
+        required: false
+      pr_author:
+        description: 'Optional override for PR author/login (manual dispatch)'
+        required: false
 
 jobs:
   update-changelog:
@@ -30,10 +39,29 @@ jobs:
       - name: Generate changelog entry
         id: changelog
         run: |
-          PR_NUMBER="${{ github.event.pull_request.number }}"
-          PR_TITLE="${{ github.event.pull_request.title }}"
-          PR_AUTHOR="${{ github.event.pull_request.user.login }}"
+          PR_NUMBER="${{ github.event.pull_request.number || github.event.inputs.pr_number }}"
+          PR_TITLE="${{ github.event.pull_request.title || github.event.inputs.pr_title }}"
+          PR_AUTHOR="${{ github.event.pull_request.user.login || github.event.inputs.pr_author }}"
           PR_BODY="${{ github.event.pull_request.body }}"
+
+          # For manual dispatch, PR context is unavailable. Fetch metadata if needed.
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            if [[ -z "$PR_NUMBER" ]]; then
+              echo "ERROR: workflow_dispatch requires 'pr_number' input (or run on a merged PR event)." >&2
+              exit 1
+            fi
+
+            if [[ -z "$PR_TITLE" || -z "$PR_AUTHOR" ]]; then
+              PR_TITLE="$(gh pr view "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --json title --jq '.title')"
+              PR_AUTHOR="$(gh pr view "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --json author --jq '.author.login')"
+              PR_BODY="$(gh pr view "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --json body --jq '.body')"
+            fi
+          fi
+
+          if [[ -z "$PR_NUMBER" || -z "$PR_TITLE" || -z "$PR_AUTHOR" ]]; then
+            echo "ERROR: Missing PR metadata. PR_NUMBER='$PR_NUMBER' PR_TITLE='$PR_TITLE' PR_AUTHOR='$PR_AUTHOR'." >&2
+            exit 1
+          fi
 
           # Categorize based on commit message prefix
           CATEGORY="Changed"
@@ -49,6 +77,9 @@ jobs:
 
           echo "category=$CATEGORY" >> $GITHUB_OUTPUT
           echo "entry=- $PR_TITLE (#$PR_NUMBER) @$PR_AUTHOR" >> $GITHUB_OUTPUT
+          echo "pr_number=$PR_NUMBER" >> $GITHUB_OUTPUT
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update CHANGELOG.md
         run: |
@@ -103,7 +134,7 @@ jobs:
         if: steps.check.outputs.changed == 'true'
         run: |
           git add CHANGELOG.md
-          git commit -m "docs: Update CHANGELOG for PR #${{ github.event.pull_request.number }}"
+          git commit -m "docs: Update CHANGELOG for PR #${{ steps.changelog.outputs.pr_number }}"
           git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
