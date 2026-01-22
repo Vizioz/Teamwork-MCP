@@ -1,4 +1,5 @@
 import getUserTaskCompletion from '../../services/reporting/getUserTaskCompletion.js';
+import { createErrorResponse } from '../../utils/errorHandler.js';
 
 export const getProjectsReportingUserTaskCompletionDefinition = {
   name: "getProjectsReportingUserTaskCompletion",
@@ -194,11 +195,6 @@ export async function handleGetProjectsReportingUserTaskCompletion(input: any) {
       }]
     };
   } catch (error: any) {
-    return {
-      content: [{
-        type: "text",
-        text: `Error: ${error.message}`
-      }]
-    };
+    return createErrorResponse(error, 'Retrieving user task completion');
   }
 } 

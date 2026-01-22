@@ -5,6 +5,7 @@
 
 import logger from "../../utils/logger.js";
 import teamworkService from "../../services/index.js";
+import { createErrorResponse } from "../../utils/errorHandler.js";
 
 // Tool definition
 export const getProjectsDefinition = {
@@ -262,22 +263,6 @@ export async function handleGetProjects(input: any) {
       };
     }
   } catch (error: any) {
-    logger.error(`Error in getProjects handler: ${error.message}`);
-    if (error.stack) {
-      logger.error(`Stack trace: ${error.stack}`);
-    }
-    if (error.response) {
-      logger.error(`API response error: ${JSON.stringify({
-        status: error.response.status,
-        statusText: error.response.statusText,
-        data: error.response.data
-      })}`);
-    }
-    return {
-      content: [{
-        type: "text",
-        text: `Error retrieving projects: ${error.message}`
-      }]
-    };
+    return createErrorResponse(error, 'Retrieving projects');
   }
 } 

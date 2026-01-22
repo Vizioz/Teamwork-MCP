@@ -5,6 +5,7 @@
 
 import logger from '../../utils/logger.js';
 import teamworkService from '../../services/index.js';
+import { createErrorResponse } from '../../utils/errorHandler.js';
 
 // Tool definition
 export const getTimezonesDefinition = {
@@ -38,12 +39,6 @@ export async function handleGetTimezones() {
       }]
     };
   } catch (error: any) {
-    logger.error(`Error in getTimezones handler: ${error.message}`);
-    return {
-      content: [{
-        type: "text",
-        text: `Error retrieving timezones: ${error.message}`
-      }]
-    };
+    return createErrorResponse(error, 'Retrieving timezones');
   }
 } 

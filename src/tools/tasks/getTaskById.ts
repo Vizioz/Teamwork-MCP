@@ -5,6 +5,7 @@
 
 import logger from "../../utils/logger.js"; 
 import teamworkService from "../../services/index.js";
+import { createErrorResponse } from "../../utils/errorHandler.js";
 
 // Tool definition
 export const getTaskByIdDefinition = {
@@ -48,12 +49,6 @@ export async function handleGetTaskById(input: any) {
       }]
     };
   } catch (error: any) {
-    logger.error(`Error in getTaskById handler: ${error.message}`);
-    return {
-      content: [{
-        type: "text",
-        text: `Error retrieving task: ${error.message}`
-      }]
-    };
+    return createErrorResponse(error, 'Retrieving task');
   }
 } 

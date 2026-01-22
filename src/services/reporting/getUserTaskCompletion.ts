@@ -1,4 +1,3 @@
-import apiClient from '../core/apiClient.js';
 import { ensureApiClient } from '../core/apiClient.js';
 
 interface GetUserTaskCompletionParams {

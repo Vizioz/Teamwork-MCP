@@ -302,6 +302,21 @@
 
 ## MCP Implementation Issues
 
+### 12/03/2025
+
+- ✅ Improved error handling across all MCP tools to provide helpful error messages
+  - Created new utility function `createErrorResponse` in `src/utils/errorHandler.ts`
+  - Extracts detailed error information from API responses (status, statusText, data)
+  - Adds helpful hints for common HTTP error codes (400, 401, 403, 404, 422, 429, 5xx)
+  - Updated all 36 tool handlers to use the new error handling utility
+  - Error messages now include: HTTP status, error details from API response, and helpful hints
+
+- ✅ Fixed GitHub Issue #8: MCP Parameter Validation Error with square bracket property names
+  - Renamed `'fields[utilizations]'` to `fieldsUtilizations` in getPeopleUtilization.ts schema
+  - Renamed `'fields[users]'` to `fieldsUsers` in getPeopleUtilization.ts schema
+  - Added field mapping in handler to convert camelCase names back to API format
+  - Follows the established pattern used in getTasks.ts and getProjectPerson.ts
+
 ### 04/13/2025
 
 - ✅ Implemented Timezone endpoint

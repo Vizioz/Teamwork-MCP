@@ -5,6 +5,7 @@
 
 import logger from "../../utils/logger.js";
 import teamworkService from "../../services/index.js";
+import { createErrorResponse } from "../../utils/errorHandler.js";
 
 // Tool definition
 export const deleteCompanyDefinition = {
@@ -52,12 +53,6 @@ export async function handleDeleteCompany(input: any) {
       }]
     };
   } catch (error: any) {
-    logger.error(`Error in deleteCompany handler: ${error.message}`);
-    return {
-      content: [{
-        type: "text",
-        text: `Error deleting company: ${error.message}`
-      }]
-    };
+    return createErrorResponse(error, 'Deleting company');
   }
 } 

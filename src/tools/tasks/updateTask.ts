@@ -7,6 +7,7 @@ import logger from "../../utils/logger.js";
 import teamworkService from "../../services/index.js";
 import { TaskRequest } from "../../models/TaskRequest.js";
 import { TaskTask } from "../../models/TaskTask.js";
+import { createErrorResponse } from "../../utils/errorHandler.js";
 
 // Tool definition
 export const updateTaskDefinition = {
@@ -536,11 +537,6 @@ export async function handleUpdateTask(input: any) {
       }]
     };
   } catch (error: any) {
-    return {
-      content: [{
-        type: "text",
-        text: `Error: ${error.message}`
-      }]
-    };
+    return createErrorResponse(error, 'Updating task');
   }
 } 

@@ -1,4 +1,5 @@
 import getUtilization from '../../services/people/getUtilization.js';
+import { createErrorResponse } from '../../utils/errorHandler.js';
 
 export const getProjectsReportingUtilizationDefinition = {
   name: "getProjectsReportingUtilization",
@@ -209,11 +210,6 @@ export async function handleGetProjectsReportingUtilization(input: any) {
       }]
     };
   } catch (error: any) {
-    return {
-      content: [{
-        type: "text",
-        text: `Error: ${error.message}`
-      }]
-    };
+    return createErrorResponse(error, 'Getting utilization report');
   }
 } 

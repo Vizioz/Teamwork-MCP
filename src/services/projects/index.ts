@@ -1,7 +1,6 @@
 import getProjects from './getProjects.js';
 import getCurrentProject from './getCurrentProject.js';
-import createProject from './createProject.js';
-import CreateProjectData from './createProject.js';
+import createProject, { CreateProjectData } from './createProject.js';
 
 export {
   getProjects,
@@ -13,6 +12,5 @@ export {
 export default {
   getProjects,
   getCurrentProject,
-  createProject,
-  CreateProjectData
+  createProject
 }; 

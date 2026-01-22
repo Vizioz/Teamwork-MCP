@@ -1,5 +1,6 @@
 import { getTime as getTimeService } from '../../services/time/getTime.js';
 import logger from '../../utils/logger.js';
+import { createErrorResponse } from '../../utils/errorHandler.js';
 
 /**
  * Tool definition for getting all time entries
@@ -148,12 +149,6 @@ export async function handleGetTime(input: any) {
       }]
     };
   } catch (error: any) {
-    logger.error(`Error in getTime handler: ${error.message}`);
-    return {
-      content: [{
-        type: "text",
-        text: `Error: ${error.message}`
-      }]
-    };
+    return createErrorResponse(error, 'Getting time entries');
   }
 } 

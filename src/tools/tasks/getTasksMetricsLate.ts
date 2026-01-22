@@ -6,6 +6,7 @@
 
 import logger from "../../utils/logger.js";
 import { getApiClientForVersion } from "../../services/core/apiClient.js";
+import { createErrorResponse } from "../../utils/errorHandler.js";
 
 // Tool definition
 export const getTasksMetricsLateDefinition = {
@@ -40,12 +41,6 @@ export async function handleGetTasksMetricsLate() {
       }]
     };
   } catch (error: any) {
-    logger.error(`Error in getTasksMetricsLate handler: ${error.message}`);
-    return {
-      content: [{
-        type: "text",
-        text: `Error: ${error.message}`
-      }]
-    };
+    return createErrorResponse(error, 'Retrieving late tasks metrics');
   }
 } 

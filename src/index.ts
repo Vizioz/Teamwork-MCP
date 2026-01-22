@@ -1,9 +1,8 @@
-import { Server } from "@modelcontextprotocol/sdk/server/index.js";
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import {
   CallToolRequestSchema,
-  ListToolsRequestSchema,
-  Prompt
+  ListToolsRequestSchema
 } from "@modelcontextprotocol/sdk/types.js";
 
 import logger from "./utils/logger.js";
@@ -16,11 +15,11 @@ import {
   toolHandlersMap
 } from "./tools/index.js";
 
-// Create MCP server
-const server = new Server(
+// Create MCP server using the high-level McpServer API
+const mcpServer = new McpServer(
   {
     name: 'teamwork-mcp',
-    version: '0.1.16-alpha'
+    version: '0.1.20'
   },
   {
     capabilities: {
@@ -28,6 +27,9 @@ const server = new Server(
     },
   }
 );
+
+// Access the underlying Server for advanced request handlers
+const server = mcpServer.server;
 
 /**
  * Validates and sanitizes a response to ensure it can be properly serialized
@@ -193,7 +195,7 @@ async function main() {
         // Log startup information to file only
         logger.info('=== Teamwork MCP Server Starting ===');
         logger.info(`Server name: teamwork-mcp`);
-        logger.info(`Server version: 0.1.16-alpha`);
+        logger.info(`Server version: 0.1.20`);
         logger.info(`Node.js version: ${process.version}`);
         logger.info(`Environment: ${process.env.NODE_ENV || 'development'}`);
         
@@ -224,7 +226,7 @@ async function main() {
         // Connect using stdio transport - no console output
         logger.info('Connecting to stdio transport...');
         const transport = new StdioServerTransport();
-        await server.connect(transport);
+        await mcpServer.connect(transport);
         logger.info('Server connected to stdio transport successfully');
         logger.info('=== Teamwork MCP Server Ready ===');
     } catch (error: any) {

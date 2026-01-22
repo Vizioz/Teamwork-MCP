@@ -5,6 +5,7 @@
 
 import logger from '../../utils/logger.js';
 import teamworkService from '../../services/index.js';
+import { createErrorResponse } from '../../utils/errorHandler.js';
 
 // Tool definition
 export const updatePersonDefinition = {
@@ -106,12 +107,6 @@ export async function handleUpdatePerson(input: any) {
       }]
     };
   } catch (error: any) {
-    logger.error(`Error in updatePerson handler: ${error.message}`);
-    return {
-      content: [{
-        type: "text",
-        text: `Error updating person: ${error.message}`
-      }]
-    };
+    return createErrorResponse(error, 'Updating person');
   }
 } 

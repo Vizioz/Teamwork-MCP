@@ -1,5 +1,6 @@
 import { getProjectPerson as getProjectPersonService } from '../../services/people/getProjectPerson.js';
 import logger from '../../utils/logger.js';
+import { createErrorResponse } from '../../utils/errorHandler.js';
 
 export const getProjectPersonDefinition = {
   name: "getProjectPerson",
@@ -346,12 +347,6 @@ export async function handleGetProjectPerson(input: any) {
       }]
     };
   } catch (error: any) {
-    logger.error(`Error in handleGetProjectPerson: ${error.message}`);
-    return {
-      content: [{
-        type: "text",
-        text: `Error retrieving project person: ${error.message}`
-      }]
-    };
+    return createErrorResponse(error, 'Retrieving project person');
   }
 } 
